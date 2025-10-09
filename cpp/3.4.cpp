@@ -1,6 +1,4 @@
-#include <fstream>
 #include <iostream>
-#include <string>
 using namespace std;
 
 void m(int a, int b) {
@@ -11,15 +9,18 @@ void m(int a, int b) {
       b = b % a;
     }
   }
-  cout << a + b;
+  cout << "Деление: " << a + b << endl;
 }
 
 void d(int a, int b) {
   while (a != 0 && b != 0) {
     if (a > b) {
-      a
+      a = a - b;
+    } else {
+      b = b - a;
     }
   }
+  cout << "Разность: " << a + b << endl;
 }
 
 int main() {
@@ -31,9 +32,18 @@ int main() {
        << endl;
 
   int a, b;
-  cout << "Введите числа a, b: " << endl;
+  cout << "Введите числа a, b: ";
   cin >> a >> b;
-  m(a, b);
 
+  if (a == 0 && b == 0) {
+    cout << "НОД(0, 0) не определен";
+    return 1;
+  }
+
+  a = abs(a);
+  b = abs(b);
+
+  m(a, b);
+  d(a, b);
   return 0;
 }

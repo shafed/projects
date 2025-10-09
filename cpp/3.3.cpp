@@ -14,6 +14,17 @@ int main() {
   wcout << L"Условие: Задать строку из 30 букв и расставить их в алфавитном "
            L"порядке"
         << endl;
+  wstring f;
+  wcout << L"Введите строку: ";
+  wcin >> f;
+  wofstream fout("30.txt");
+  if (!fout.is_open()) {
+    wcout << L"Не удалось открыть файл" << endl;
+    return 1;
+  } else {
+    fout << f;
+    fout.close();
+  }
 
   wifstream fin("30.txt");
 
@@ -28,7 +39,11 @@ int main() {
 
   for (wchar_t c : s) {
     if (!iswalpha(c)) {
-      wcout << L"В файле есть не буква: " << c << endl;
+      wcout << L"В файле есть не буквы: ";
+      for (wchar_t d : s)
+        if (!iswalpha(d)) {
+          wcout << d;
+        }
       return 1;
     }
   }
