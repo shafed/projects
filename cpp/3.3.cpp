@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <cctype>
+#include <codecvt>
 #include <fstream>
 #include <iostream>
 #include <locale>
@@ -7,35 +7,38 @@
 using namespace std;
 
 int main() {
+  locale::global(locale("ru_RU.UTF-8"));
 
-  cout << "КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
-  cout << "Практическое задание №2" << endl;
-  cout
-      << R"(Условие: Задать строку из 30 букв и расставить их в алфавитном порядке)"
-      << endl;
+  wcout << L"КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
+  wcout << L"Практическое задание №3" << endl;
+  wcout << L"Условие: Задать строку из 30 букв и расставить их в алфавитном "
+           L"порядке"
+        << endl;
 
-  locale loc("ru_RU.UTF-8");
-  locale::global(loc);
-  cin.imbue(locale());
-  cout.imbue(locale());
-  ifstream fin("30.txt");
-  fin.imbue(loc);
-  string s;
-  getline(fin, s);
+  wifstream fin("30.txt");
 
-  for (char c : s)
-
-    if (!(((c > 64) && (c <= 90)) || ((c > 96) && (c <= 122)) || (c < 0))) {
-      cout << "В файле есть не буква";
-      return 0;
-    }
-
-  if (s.length() > 30) {
-    cout << "Файл состоит из больше чем 30 букв";
-  } else {
-    sort(s.begin(), s.end());
-    cout << s;
+  if (!fin.is_open()) {
+    wcout << L"Не удалось открыть файл" << endl;
+    return 1;
   }
 
+  wstring s;
+  getline(fin, s);
+  fin.close();
+
+  for (wchar_t c : s) {
+    if (!iswalpha(c)) {
+      wcout << L"В файле есть не буква: " << c << endl;
+      return 1;
+    }
+  }
+
+  if (s.length() > 30) {
+    wcout << L"Файл состоит из больше чем 30 букв: " << s.length() << endl;
+    return 1;
+  }
+
+  sort(s.begin(), s.end());
+  wcout << L"Строка: " << s << endl;
   return 0;
 }

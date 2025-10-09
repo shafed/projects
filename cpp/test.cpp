@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <cctype>
 #include <codecvt>
 #include <fstream>
 #include <iostream>
@@ -8,60 +7,38 @@
 using namespace std;
 
 int main() {
-  cout << "КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
-  cout << "Практическое задание №2" << endl;
-  cout
-      << R"(Условие: Задать строку из 30 букв и расставить их в алфавитном порядке)"
-      << endl;
+  locale::global(locale("ru_RU.UTF-8"));
 
-  // Устанавливаем локаль для корректной работы с русскими буквами
-  locale loc("ru_RU.UTF-8");
-  locale::global(loc);
+  wcout << L"КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
+  wcout << L"Практическое задание №3" << endl;
+  wcout << L"Условие: Задать строку из 30 букв и расставить их в алфавитном "
+           L"порядке"
+        << endl;
 
-  // Открываем файл с UTF-8 кодировкой
   wifstream fin("30.txt");
-  fin.imbue(loc);
 
   if (!fin.is_open()) {
-    cout << "Не удалось открыть файл" << endl;
+    wcout << L"Не удалось открыть файл" << endl;
     return 1;
   }
 
-  wstring ws;
-  getline(fin, ws);
+  wstring s;
+  getline(fin, s);
   fin.close();
 
-  // Проверяем каждый символ
-  for (size_t i = 0; i < ws.length(); ++i) {
-    wchar_t c = ws[i];
-    bool isValid = (c >= L'A' && c <= L'Z') || (c >= L'a' && c <= L'z') ||
-                   (c >= L'А' && c <= L'Я') || (c >= L'а' && c <= L'я') ||
-                   c == L'Ё' || c == L'ё';
-
-    if (!isValid) {
-      if (i < 30) {
-        wcout << L"В файле есть не буква" << endl;
-        return 0;
-      } else {
-        wcout << L"После 30-й буквы есть посторонний символ" << endl;
-        return 0;
-      }
+  for (wchar_t c : s) {
+    if (!iswalpha(c)) {
+      wcout << L"В файле есть не буква: " << c << endl;
+      return 1;
     }
   }
 
-  // Проверяем длину
-  if (ws.length() > 30) {
-    wcout << L"Файл состоит из больше чем 30 букв" << endl;
-    return 0;
+  if (s.length() > 30) {
+    wcout << L"Файл состоит из больше чем 30 букв: " << s.length() << endl;
+    return 1;
   }
 
-  // Сортируем
-  sort(ws.begin(), ws.end());
-
-  // Конвертируем обратно в UTF-8 для вывода
-  wstring_convert<codecvt_utf8<wchar_t>> converter;
-  string result = converter.to_bytes(ws);
-  cout << result << endl;
-
+  sort(s.begin(), s.end());
+  wcout << L"Строка: " << s << endl;
   return 0;
 }

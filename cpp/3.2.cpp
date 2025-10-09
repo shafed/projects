@@ -3,15 +3,48 @@
 #include <string>
 using namespace std;
 
+void nuli(string n) {
+  if (n.length() == 1)
+    cout << n;
+  else {
+    while (n[0] == '0') {
+      n = n.substr(1);
+    }
+    if (n.length() == 0)
+      cout << '0';
+    else
+      cout << n;
+  }
+  // 0102 -> 102
+  // 012 -> 12
+  // 0 -> 0
+  // 000 -> 0
+}
+
 int main() {
 
   cout << "КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
-  cout << "Практическое задание №2" << endl;
+  cout << "Практическое задание №3" << endl;
   cout
       << R"(Условие: Вывести на экран только числа из созданного Вами на диске текстового файла, содержащего буквы и числа)"
       << endl;
 
+  ofstream fout("digit.txt");
+  if (fout.is_open()) {
+    fout << "adf000asjj123jkljj0asjfjfd0102ksjfklj012kjaj11jjk0000jjk0500";
+    fout.close();
+  } else {
+    cout << "Error";
+    return 1;
+  }
+
   ifstream fin("digit.txt");
+
+  if (!fin.is_open()) {
+    cout << "Error" << endl;
+    return 1;
+  }
+
   string line, n = "";
   while (getline(fin, line)) {
     for (int i = 0; i < line.length(); i++) {
@@ -19,16 +52,23 @@ int main() {
         n += line[i];
       else {
         if (n != "") {
-          if (n[0] != '0')
-            cout << n << " ";
+          if (n[0] != '0' || n.length() == 1)
+            cout << n;
           else
-            cout << n.substr(1) << " ";
+            nuli(n);
           n = "";
         }
       }
     }
   }
-  if (n != "")
-    cout << n;
+
+  if (n != "") {
+    if (n[0] != '0' || n.length() == 1)
+      cout << n;
+    else
+      nuli(n);
+  }
+
+  fin.close();
   return 0;
 }

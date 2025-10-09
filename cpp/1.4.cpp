@@ -2,6 +2,8 @@
 #include <iostream>
 using namespace std;
 
+double fix(double x) { return (x == 0 ? 0 : x); }
+
 int main() {
 
   cout << "- КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
@@ -20,18 +22,16 @@ int main() {
       else
         cout << "Нет решений";
     } else
-      cout << "x = " << -c / b;
-  } else if (c == 0)
-    cout << "x = 0"; //-0
-  else {
+      cout << "x = " << fix(-c / b);
+  } else {
     d = b * b - 4 * a * c;
     if (d < 0)
       cout << "Нет решений";
     else if (d == 0)
-      cout << "x = " << -b / (2 * a);
+      cout << "x = " << fix(-b / (2 * a));
     else
-      cout << "x1 = " << (-b + sqrt(d)) / (2 * a)
-           << " x2 = " << (-b - sqrt(d)) / (2 * a);
+      cout << "x1 = " << fix((-b + sqrt(d)) / (2 * a))
+           << " x2 = " << fix((-b - sqrt(d)) / (2 * a));
   }
   return 0;
 }
