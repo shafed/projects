@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-double fix(double x) { return (x == 0 ? 0 : x); }
+double fix(double x) { return x + 0; }
 
 int main() {
 

@@ -18,7 +18,7 @@ int main() {
   else if (b < x)
     cout << "Нет решений";
   else
-    cout << log(b - y) * sqrt(b - x);
+    cout << log(b - y) * sqrt(b - x) + 0 << endl;
 
   return 0;
 }

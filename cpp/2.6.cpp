@@ -12,21 +12,24 @@ int main() {
  m = (Sr * (1+r)^n) / (12 * ((1+r)^n - 1)), где r = p/100)"
       << endl;
 
-  long double m, s, n, p, r, calm;
+  long double m, s, n, p, r, calc;
   cout << "Введите S, m, n: ";
   cin >> s >> m >> n;
 
-  long double left = 0.01, right = 10000;
+  long double left = 0, right = 10000;
   if (s == m * 12 * n)
     cout << 0;
   else {
-    while (left <= right) {
+    while (left - right >= 1e-6) {
+
       p = (left + right) / 2;
       r = p / 100;
-      calm = (s * r * pow(1 + r, n)) / (12 * (pow(1 + r, n) - 1));
-      if (calm > m)
+      double temp = pow(1 + r, n);
+
+      calc = (s * r * temp) / (12 * (temp - 1));
+      if (calc > m)
         right = p;
-      else if (calm < m)
+      else if (calc < m)
         left = p;
       else {
         cout << p;

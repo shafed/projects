@@ -17,10 +17,10 @@ int main() {
   if (x == 0)
     cout << "Нет решений";
   else if (abs(x) < 1)
-    cout << a * log(abs(x));
+    cout << "w = " << a * log(abs(x)) + 0 << endl;
   else if (a - x * x < 0)
     cout << "Нет решений";
   else
-    cout << sqrt(a - x * x);
+    cout << "w = " << sqrt(a - x * x) + 0 << endl;
   return 0;
 }

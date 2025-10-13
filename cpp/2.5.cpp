@@ -12,20 +12,22 @@ int main() {
  Дано: S, p, n. Найти: m.)"
       << endl;
 
-  float m, s, n, p, r;
+  double m, s, n, p, r;
   cout << "Введите S, p, n: ";
   cin >> s >> p >> n;
   if (s <= 0 || p < 0 || n < 0)
     cout << "Введены неверные значения";
   else if (n == 0)
-    cout << s;
+    cout << s + 0;
   else {
     r = p / 100;
-    if (12 * (pow(1 + r, n) - 1) == 0)
+    double temp1 = pow(1 + r, n);
+    double temp2 = 12 * (pow(1 + r, n) - 1);
+    if (temp2 == 0)
       cout << s / (12 * n);
     else {
-      m = (s * r * pow(1 + r, n)) / (12 * (pow(1 + r, n) - 1));
-      cout << m;
+      m = (s * r * temp1) / (temp2);
+      cout << m + 0;
     }
   }
   return 0;
