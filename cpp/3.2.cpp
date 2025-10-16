@@ -31,7 +31,8 @@ int main() {
 
   ofstream fout("digit.txt");
   if (fout.is_open()) {
-    fout << "adf000asjj123jkljj0asjfjfd0102ksjfklj012kjaj11jjk0000jjk0500";
+    fout << "adf000asjj123jkljj0asjfjfd0102ksjfklj012kjaj11jjk0000jjk0500"
+         << endl;
     fout.close();
   } else {
     cout << "Error";
