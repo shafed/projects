@@ -1,44 +1,54 @@
-#include <algorithm>
-#include <codecvt>
-#include <fstream>
+#include <cmath>
 #include <iostream>
-#include <locale>
-#include <string>
 using namespace std;
 
 int main() {
-  locale::global(locale("ru_RU.UTF-8"));
 
-  wcout << L"КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
-  wcout << L"Практическое задание №3" << endl;
-  wcout << L"Условие: Задать строку из 30 букв и расставить их в алфавитном "
-           L"порядке"
-        << endl;
+  cout << "КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
+  cout << "Практическое задание №2" << endl;
+  cout
+      << R"(Условие: Под какой процент p выдана ссуда величиной S рублей, которая гасится месячными выплатами величиной m в течение n лет.
+ Формула:
+ m = (Sr * (1+r)^n) / (12 * ((1+r)^n - 1)), где r = p/100)"
+      << endl;
 
-  wifstream fin("30.txt");
+  long double m, s, n, p, r, calc;
+  cout << "Введите S, m, n: ";
+  cin >> s >> m >> n;
 
-  if (!fin.is_open()) {
-    wcout << L"Не удалось открыть файл" << endl;
-    return 1;
+  long double left = 0, right = 100; // диапазон p, %
+  const long double eps = 1e-7;
+
+  // проверка на p = 0
+  if (fabsl(s - m * 12 * n) < 1e-12) {
+    cout.setf(ios::fixed);
+    cout.precision(6);
+    cout << 0.0L << endl;
+    return 0;
   }
 
-  wstring s;
-  getline(fin, s);
-  fin.close();
-
-  for (wchar_t c : s) {
-    if (!iswalpha(c)) {
-      wcout << L"В файле есть не буква: " << c << endl;
-      return 1;
-    }
+  // если платеж слишком мал, решения при p >= 0 нет
+  if (m < s / (12.0L * n) - 1e-12) {
+    cout << "Решения при p >= 0 нет (слишком маленький платеж)" << endl;
+    return 0;
   }
 
-  if (s.length() > 30) {
-    wcout << L"Файл состоит из больше чем 30 букв: " << s.length() << endl;
-    return 1;
+  while (right - left >= eps) {
+    p = (left + right) / 2;
+    r = p / 100; // годовая доля
+    long double temp = pow(1 + r, n);
+
+    calc = (s * r * temp) / (12 * (temp - 1)); // платеж по формуле из задания
+
+    if (calc > m)
+      right = p;
+    else
+      left = p; // включаем равенство, чтобы не зациклиться
   }
 
-  sort(s.begin(), s.end());
-  wcout << L"Строка: " << s << endl;
+  cout.setf(ios::fixed);
+  cout.precision(6);
+  cout << (left + right) / 2 << endl; // выводим p в % годовых
+
   return 0;
 }

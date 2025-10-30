@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
@@ -13,9 +12,9 @@ int main() {
   int n, i = 2, j;
   cout << "Введите натуральное число: ";
   cin >> n;
-  vector<int> primes;
+  int primes[n + 1];
   for (int k = 0; k <= n; k++) {
-    primes.push_back(k);
+    primes[k] = k;
   }
 
   if (n < 1) {

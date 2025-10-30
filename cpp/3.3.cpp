@@ -53,7 +53,8 @@ int main() {
     return 1;
   }
 
-  sort(s.begin(), s.end());
+  sort(s.begin(), s.end(),
+       [](char a, char b) { return tolower(a) < tolower(b); });
   wcout << L"Строка: " << s << endl;
   return 0;
 }

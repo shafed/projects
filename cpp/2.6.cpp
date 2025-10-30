@@ -15,28 +15,34 @@ int main() {
   long double m, s, n, p, r, calc;
   cout << "Введите S, m, n: ";
   cin >> s >> m >> n;
-
-  long double left = 0, right = 10000;
-  if (s == m * 12 * n)
-    cout << 0;
-  else {
-    while (left - right >= 1e-6) {
-
-      p = (left + right) / 2;
-      r = p / 100;
-      double temp = pow(1 + r, n);
-
-      calc = (s * r * temp) / (12 * (temp - 1));
-      if (calc > m)
-        right = p;
-      else if (calc < m)
-        left = p;
-      else {
-        cout << p;
-        break;
-      }
-    }
+  if (s <= 0 || m <= 0 || n <= 0) {
+    cout << "Отрицательные значения" << endl;
+    return 1;
   }
+
+  if ((m - s / (12 * n)) < -1e-9) {
+    cout << "Платёж слишком мал" << endl;
+    return 1;
+  }
+
+  long double left = 0, right = 100;
+  if (fabs(s - m * 12 * n) < 1e-9) {
+    cout << 0;
+    return 0;
+  }
+
+  while (right - left >= 1e-7) {
+    p = (left + right) / 2;
+    r = p / 100;
+    long double temp = pow(1 + r, n);
+
+    calc = (s * r * temp) / (12 * (temp - 1));
+    if (calc > m)
+      right = p;
+    else
+      left = p;
+  }
+  cout << (left + right) / 2;
 
   return 0;
 }
