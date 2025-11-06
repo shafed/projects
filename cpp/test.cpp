@@ -1,54 +1,49 @@
 #include <cmath>
 #include <iostream>
-using namespace std;
+#include <string>
+#include <vector>
 
 int main() {
+  // Диапазон и шаг
+  double x_start = -10;
+  double x_end = 10;
+  double x_step = 0.5;
 
-  cout << "КВБО-11-25 Шапаренко Фёдор Александрович" << endl;
-  cout << "Практическое задание №2" << endl;
-  cout
-      << R"(Условие: Под какой процент p выдана ссуда величиной S рублей, которая гасится месячными выплатами величиной m в течение n лет.
- Формула:
- m = (Sr * (1+r)^n) / (12 * ((1+r)^n - 1)), где r = p/100)"
-      << endl;
+  // Размеры терминала
+  int width = 40;
+  int height = 20;
 
-  long double m, s, n, p, r, calc;
-  cout << "Введите S, m, n: ";
-  cin >> s >> m >> n;
+  // Создание матрицы
+  std::vector<std::string> screen(height, std::string(width, ' '));
 
-  long double left = 0, right = 100; // диапазон p, %
-  const long double eps = 1e-7;
+  // Нарисовать оси
+  for (int i = 0; i < height; ++i) {
+    screen[i][width / 2] = '|';
+  }
+  for (int i = 0; i < width; ++i) {
+    screen[height / 2][i] = '-';
+  }
+  screen[height / 2][width / 2] = '+';
 
-  // проверка на p = 0
-  if (fabsl(s - m * 12 * n) < 1e-12) {
-    cout.setf(ios::fixed);
-    cout.precision(6);
-    cout << 0.0L << endl;
-    return 0;
+  // Нарисовать график функции
+  for (double x = x_start; x <= x_end; x += x_step) {
+    double y = std::sin(x); // Пример функции
+
+    // Преобразование координат в индексы
+    int col = static_cast<int>((x - x_start) / (x_end - x_start) * width);
+    int row =
+        height / 2 - static_cast<int>(y / 10 * height /
+                                      2); // Предполагая, что y от -10 до 10
+
+    if (col >= 0 && col < width && row >= 0 && row < height) {
+      screen[row][col] = '*';
+    }
   }
 
-  // если платеж слишком мал, решения при p >= 0 нет
-  if (m < s / (12.0L * n) - 1e-12) {
-    cout << "Решения при p >= 0 нет (слишком маленький платеж)" << endl;
-    return 0;
+  // Вывод графика
+  for (const auto &row : screen) {
+    std::cout << row << std::endl;
   }
-
-  while (right - left >= eps) {
-    p = (left + right) / 2;
-    r = p / 100; // годовая доля
-    long double temp = pow(1 + r, n);
-
-    calc = (s * r * temp) / (12 * (temp - 1)); // платеж по формуле из задания
-
-    if (calc > m)
-      right = p;
-    else
-      left = p; // включаем равенство, чтобы не зациклиться
-  }
-
-  cout.setf(ios::fixed);
-  cout.precision(6);
-  cout << (left + right) / 2 << endl; // выводим p в % годовых
 
   return 0;
 }
