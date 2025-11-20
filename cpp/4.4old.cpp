@@ -1,11 +1,17 @@
 #include <iostream>
 using namespace std;
-typedef long long ll;
 
-ll s(ll m, ll i, ll c) {
-  if (i == 0)
-    return 0;
-  return (m * s(m, i - 1, c) + i - 1) % c;
+void generator(long long m, long long i, long long c, long long k) {
+  long long s[i + 1];
+  s[0] = 0;
+  for (long long j = 0; j < i; j++) {
+    s[j + 1] = (m * s[j] + j) % c;
+  }
+  cout << "Первые " << k + 1 << " чисел: ";
+  for (int j = 0; j < k + 1; j++) {
+    cout << s[j] << ' ';
+  }
+  cout << endl;
 }
 
 int main() {
@@ -15,9 +21,6 @@ int main() {
 псевдослучайных чисел по рекуррентной формуле:
 s_{i+1} = (m*s_i + i) mod c, где m, i, c – целые числа.)"
        << endl;
-  ll a, b;
-  a = s(37, 3, 64);
-  b = s(25173, 13849, 65537);
-  cout << a << endl;
-  cout << b << endl;
+  generator(37, 3, 64, 3);
+  generator(25173, 13849, 65537, 13849);
 }

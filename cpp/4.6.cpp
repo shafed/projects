@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+
+int max_or_min(float C[3][2], int col, bool mx) {
+  float max1 = C[0][col];
+  float min1 = C[0][col];
+  int index = 0;
+  if (mx == 1) {
+    for (int i = 0; i < 3; i++) {
+      if (C[i][col] >= max1) {
+        max1 = C[i][col];
+        index = i + 1;
+      }
+    }
+  } else {
+    for (int i = 0; i < 3; i++) {
+      if (C[i][col] <= min1) {
+        min1 = C[i][col];
+        index = i + 1;
+      }
+    }
+  }
+  return index;
+}
+
+float sum(float C[3][2], int col) {
+
+  float sum = 0;
+  for (int i = 0; i < 3; i++) {
+    sum += C[i][col];
+  }
+  return sum;
+}
+
+int main() {
+
+  int A[3][4] = {{5, 2, 0, 10}, {3, 5, 2, 5}, {20, 0, 0, 0}};
+  float B[4][2] = {{1.2, 0.5}, {2.8, 0.4}, {5, 1}, {2, 1.5}};
+  float C[3][2];
+
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 2; j++) {
+      for (int k = 0; k < 4; k++)
+        C[i][j] += A[i][k] * B[k][j];
+    }
+  }
+
+  //Вывод Матриц
+  cout << "matrix A" << endl;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 4; j++) {
+      cout << A[i][j] << " ";
+    }
+    cout << endl;
+  }
+
+  cout << "matrix B" << endl;
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 2; j++) {
+      cout << B[i][j] << " ";
+    }
+    cout << endl;
+  }
+  cout << "matrix C" << endl;
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 2; j++) {
+      cout << C[i][j] << " ";
+    }
+    cout << endl;
+  }
+  //для матрицы C: 00 - цена за все товары продавца 1, 01 комиссионные за все
+  //товары продавца 1
+
+  cout << endl;
+  // 1) какой продавец выручил больше всего денег с продажи, какой – меньше;
+  cout << "1) Продавец, выручивший БОЛЬШЕ всего денег с продажи: ";
+  cout << max_or_min(C, 0, 1) << endl;
+  cout << "   Продавец, выручивший МЕНЬШЕ всего денег с продажи: ";
+  cout << max_or_min(C, 0, 0) << endl;
+  // 2) какой получил наибольшие комиссионные, какой – наименьшие;
+  cout << "2) Продавец, выручивший БОЛЬШЕ всего комиссионных с продажи: ";
+  cout << max_or_min(C, 1, 1) << endl;
+  cout << "   Продавец, выручивший МЕНЬШЕ всего комиссионных с продажи: ";
+  cout << max_or_min(C, 1, 0) << endl;
+
+  // 3) чему равна общая сумма денег, вырученных за проданные товары;
+  cout << "3) Общая сумма вырученных денег: ";
+  cout << abs(sum(C, 1) - sum(C, 0)) << endl;
+
+  // 4) сколько всего комиссионных получили продавцы;
+  cout << "4) Общая сумма комиссионных: ";
+  cout << sum(C, 1) << endl;
+
+  // 5) чему равна общая сумма денег, прошедших через руки продавцов?
+  cout << "5) Общая сумма денег, прошедших через руки продавцов: ";
+  cout << sum(C, 0) << endl;
+}
