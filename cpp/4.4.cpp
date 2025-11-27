@@ -5,7 +5,7 @@ typedef long long ll;
 ll s(ll m, ll i, ll c) {
   if (i == 0)
     return 0;
-  return (m * s(m, i - 1, c) + i - 1) % c;
+  return (m * s(m, i - 1, c) + i) % c;
 }
 
 int main() {
