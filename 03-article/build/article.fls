@@ -1,7 +1,7 @@
-PWD /home/shafed/work/article
+PWD /home/shafed/projects/03-article
 INPUT /var/lib/texmf/web2c/luahbtex/lualatex.fmt
 INPUT ./article.tex
-OUTPUT article.log
+OUTPUT build/article.log
 INPUT /usr/share/texmf-dist/tex/latex/tex-ini-files/lualatexquotejobname.lua
 INPUT /usr/share/texmf-dist/tex/latex/base/ltluatex.lua
 INPUT /usr/share/texmf-dist/tex/luatex/luaotfload/luaotfload-main.lua
@@ -101,8 +101,8 @@ INPUT /home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/pts75f.luc
 INPUT /home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/pts56f.luc
 INPUT /home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/ptm55f.luc
 INPUT /home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/ptm75f.luc
-INPUT ./article.aux
-OUTPUT article.aux
+INPUT ./build/article.aux
+OUTPUT build/article.aux
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmmi5.tfm
@@ -114,9 +114,9 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr5.tfm
-OUTPUT article.pdf
+OUTPUT build/article.pdf
 INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
-INPUT ./article.aux
+INPUT ./build/article.aux
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.3.7)  8 MAR 2026 11:18
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.3.7)  12 MAR 2026 18:22
  restricted system commands enabled.
  file:line:error style messages enabled.
 **article.tex
@@ -212,7 +212,7 @@ Package fontspec Info:
 (fontspec)             - 'bold' (b/n) with NFSS spec.: <->"name:PT
 (fontspec)             Mono/B:mode=node;script=latn;language=dflt;"
 
- (./article.aux
+ (./build/article.aux
 Package babel Info: 'russian' activates 'russian' shorthands.
 (babel)             Reported on input line 5.
 )
@@ -322,7 +322,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./article.aux)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] (./build/article.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -334,12 +334,12 @@ Here is how much of LuaTeX's memory you used:
  125240,662416 words of node,token memory allocated
  529 words of node memory still in use:
    5 hlist, 1 vlist, 1 rule, 1 local_par, 7 glue, 3 kern, 1 penalty, 3 glyph, 19 attribute, 49 glue_spec, 10 attribute_list, 1 write nodes
-   avail lists: 2:223,3:93,4:58,5:864,6:23,7:6736,8:33,9:166,10:14,11:1104
+   avail lists: 2:222,3:89,4:55,5:853,6:22,7:6669,8:33,9:164,10:14,11:1101
  28764 multiletter control sequences out of 65536+600000
  59 fonts using 5287183 bytes
- 73i,5n,92p,1003b,245s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,5n,92p,1003b,247s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/fonts/TTF/PTF55F.ttf></usr/share/fonts/TTF/PTF75F.ttf></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on article.pdf (3 pages, 86953 bytes).
+Output written on article.pdf (3 pages, 87537 bytes).
 
 PDF statistics: 48 PDF objects out of 1000 (max. 8388607)
  31 compressed objects within 1 object stream

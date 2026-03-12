@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1772957925.66329 "article.tex" "article.pdf" "article" 1772957926.47768 0
+["lualatex"] 1773328961.94732 "article.tex" "build/article.pdf" "article" 1773328962.76321 0
   "/etc/texmf/tex/generic/config/language.dat" 1772883756.50196 3114 a006ba735899d39700b07ae8d0a7aaa7 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-bold.luc" 1772883664.82043 128397 b1a63c819bb04eb1bd0314afd1be0537 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1772883664.62144 127314 202d777ecbd04f99755b23dfb376733b ""
@@ -13,8 +13,8 @@
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/pts56f.luc" 1772949162.40623 150740 3aa8da8744e4cad458f3993fa4ad48e9 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/pts75f.luc" 1772949162.30223 164361 af8dae91cb85ad4c92707ed2537f74d9 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/pts76f.luc" 1772949162.19823 147064 1f00f2d9fdf9716becf6f3d1f91f3149 ""
-  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1772957880.36652 3644 12877f9b5b54477a767b8a4d1f2f0fab ""
-  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1772949147.12246 68489 da94d39bd1a983fd2fc50488175cec59 ""
+  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1773328883.70237 7920 fd6e2bd72c216ed4cb78d5853e51fc12 ""
+  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1772970969.74766 71773 e556fac51f166b455489a099ed598f89 ""
   "/usr/share/fonts/TTF/PTF55F.ttf" 1772949137 327120 e3fc2591bd5db684620ce78780012458 ""
   "/usr/share/fonts/TTF/PTF75F.ttf" 1772949137 301536 9c384f721c0eb29386d2a95055841263 ""
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1772820570 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
@@ -113,10 +113,10 @@
   "/usr/share/texmf-dist/tex/luatex/luaotfload/luaotfload.lua" 1772820570 13566 16df94dd2de231b2bca0aaa0190941fe ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1772883821 328175 1a3212078474e4a840fbbd9b4a8d90b5 ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1772883783 5658772 4776fc1cc3f7d68f3cd54211d27ac5d8 ""
-  "article.aux" 1772957926.3887 526 9fcf5315a579fb5780e230c432ff59e7 "lualatex"
-  "article.tex" 1772957924.55526 9702 0828c6d1577cfe2e2057dbd3b222ee65 ""
+  "article.tex" 1773328959.31167 9735 75809e2eed0e87f275661bfa8ad015b8 ""
+  "build/article.aux" 1773328962.67662 674 f94fb169444e8fdf0fed2ccf64b3bf02 "lualatex"
   (generated)
-  "article.aux"
-  "article.log"
-  "article.pdf"
+  "build/article.aux"
+  "build/article.log"
+  "build/article.pdf"
   (rewritten before read)
