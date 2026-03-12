@@ -1,4 +1,4 @@
-PWD /home/shafed/work/practice
+PWD /home/shafed/projects/02-computer-science
 INPUT /var/lib/texmf/web2c/luahbtex/lualatex.fmt
 INPUT ./practice-10.tex
 OUTPUT build/practice-10.log
@@ -139,6 +139,7 @@ INPUT /usr/share/texmf-dist/tex/latex/adjustbox/tc-luatex.def
 INPUT /usr/share/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
 INPUT /usr/share/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 INPUT /usr/share/texmf-dist/tex/latex/varwidth/varwidth.sty
+INPUT /usr/share/texmf-dist/tex/latex/setspace/setspace.sty
 INPUT ./build/practice-10.aux
 OUTPUT build/practice-10.aux
 INPUT /usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii

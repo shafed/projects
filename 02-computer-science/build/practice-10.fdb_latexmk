@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1773064829.84057 "practice-10.tex" "build/practice-10.pdf" "practice-10" 1773064830.81725 0
+["lualatex"] 1773230663.19453 "practice-10.tex" "build/practice-10.pdf" "practice-10" 1773230664.14686 0
   "/etc/texmf/tex/generic/config/language.dat" 1772883756.50196 3114 a006ba735899d39700b07ae8d0a7aaa7 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc" 1772883665.10443 128286 b0e9c2dbbe3c1858732b85ff33cf8283 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc" 1772883665.04443 127657 3b1fb37a4ea28f274f9d72c03fc0bda7 ""
@@ -110,6 +110,7 @@
   "/usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg" 1772820570 678 4792914a8f45be57bb98413425e4c7af ""
   "/usr/share/texmf-dist/tex/latex/refcount/refcount.sty" 1772820570 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "/usr/share/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1772820570 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
+  "/usr/share/texmf-dist/tex/latex/setspace/setspace.sty" 1772820570 22490 8cac309b79a4c53a4ffce4b1b07aead0 ""
   "/usr/share/texmf-dist/tex/latex/tex-ini-files/lualatexquotejobname.lua" 1772820570 1020 36d4dc663e02d83b566558c712569e2d ""
   "/usr/share/texmf-dist/tex/latex/url/url.sty" 1772820570 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/share/texmf-dist/tex/latex/varwidth/varwidth.sty" 1767555874 10894 d359a13923460b2a73d4312d613554c8 ""
@@ -167,9 +168,9 @@
   "assets/схема демультиплексора.png" 1773060610.18984 32624 16b1e5a4107fc28f99f8c0f53935eb62 ""
   "assets/схема дешифратора.png" 1773060159.54071 36012 e05ab6689826ac8198cb7ddf0ac73090 ""
   "assets/таблица сумматора.png" 1773060668.66607 3842 dbfb59db268bdb831a32867bd07b7621 ""
-  "build/practice-10.aux" 1773064830.7076 1732 ff3628cdbcb1c4814484557dc7cf2d1b "lualatex"
-  "build/practice-10.out" 1773064830.60177 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
-  "practice-10.tex" 1773064182.17181 5093 35b9bfeb340c8f3d92428458248e3bbb ""
+  "build/practice-10.aux" 1773230664.02831 1732 5f2001015365f284296caba0530071a5 "lualatex"
+  "build/practice-10.out" 1773230663.92857 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
+  "practice-10.tex" 1773230661.32833 5177 28f1b7e12a09eea4e04a47065474a72f ""
   (generated)
   "build/practice-10.aux"
   "build/practice-10.log"
