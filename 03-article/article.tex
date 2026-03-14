@@ -2,6 +2,11 @@
 \usepackage{fontspec}
 \usepackage[russian]{babel}
 \usepackage[activate={true,nocompatibility},final]{microtype}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.18}
+\newcommand{\BERTspearman}{0.810}
 
 \setmainfont{PT Serif}
 \setsansfont{PT Sans}
@@ -119,5 +124,8 @@ Dot-Product Attention:
     значений слов и улавливать сложные иерархические зависимости, недоступные
     линейным методам.
 \end{itemize}
+
+\input{figures/sensitive.tex}
+\input{figures/spectrum.tex}
 
 \end{document}
