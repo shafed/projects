@@ -1,0 +1,181 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning, arrows.meta}
+\usepackage{fontspec}
+\usepackage{float}     % Для [H]
+\setmainfont{Times New Roman}
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{left=3cm,right=1.5cm,top=2cm,bottom=2cm}
+\usepackage{setspace}
+\onehalfspacing
+\linespread{1.5}
+\setlength{\parindent}{1.25cm}
+
+\title{%
+  \begin{center}
+    \includegraphics{assets/gerb.png}
+  \end{center}
+  {\large МИНИСТЕРСТВО НАУКИ И ВЫСШЕГО ОБРАЗОВАНИЯ РОССИЙСКОЙ
+  ФЕДЕРАЦИИ}\\[0.3cm]
+  {\normalsize Федеральное государственное бюджетное образовательное
+  учреждение высшего образования}\\[0.2cm]
+  {\large \textbf{«МИРЭА --- Российский технологический университет»}}\\[0.1cm]
+  {\normalsize РТУ МИРЭА}\\[0.3cm]
+  {\normalsize Институт искусственного интеллекта (ИИИ)}\\
+  {\normalsize Кафедра Промышленной информатики (ПИ)}\\[1cm]
+  {\LARGE \textbf{ОТЧЕТ}}\\[0.2cm]
+  {\Large \textbf{ПО ПРАКТИЧЕСКОЙ РАБОТЕ № 11}}\\[0.4cm]
+  {\large \textbf{по дисциплине «Информатика»}}
+}
+\author{%
+  \begin{tabular}{ll}
+    Выполнил студент группы & КВБО-11-25 \\
+    Принял ассистент        & Беднов Г.А. \\
+  \end{tabular}
+}
+\date{%
+  Практическую работу выполнил «16» 03 2026 г.\\[0.3cm]
+  «Зачтено» «»  2026 г.\\[1cm]
+  Москва 2026
+}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Тема:} «Исследование триггеров»\\
+\noindent\textbf{Цель работы:} \\
+- изучение структуры и алгоритмов
+работы асинхронных и
+синхронных триггеров; \\
+- исследование функций переходов и возбуждения основных
+типов триггеров; \\
+- изучение взаимозаменяемости триггеров различных типов.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/scheme.png}
+  \caption{схема работы RS тригера}
+\end{figure}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    S & R & \(Q_{n+1}\) \\ \hline
+    0 & 0 & \(Q_n\) \\ \hline
+    0 & 1 & 0 \\ \hline
+    1 & 0 & 1 \\ \hline
+    1 & 1 & --- \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    \(Q_n\) & \(Q_{n+1}\) & S & R \\ \hline
+    0 & 0 & 0 & x \\ \hline
+    0 & 1 & 1 & 0 \\ \hline
+    1 & 0 & 0 & 1 \\ \hline
+    1 & 1 & x & 0 \\ \hline
+  \end{tabular}
+\end{center}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.3\textwidth]{assets/bitmap.png}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/JK.png}
+  \caption{JK триггер}
+\end{figure}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|l|}
+    \hline
+    C & J & K & \(Q_n\) & \(Q_{n+1}\) & \text{Режим работы} \\
+    \hline
+    0 & \(x\) & \(x\) & 0 & 0 & \text{Хранение (запись запрещена)} \\
+    0 & \(x\) & \(x\) & 1 & 1 & \text{Хранение (запись запрещена)} \\
+    \hline
+    1 & 0 & 0 & 0 & 0 & \text{Хранение} \\
+    1 & 0 & 0 & 1 & 1 & \text{Хранение} \\
+    \hline
+    1 & 0 & 1 & \(x\) & 0 & \text{Сброс} \\
+    \hline
+    1 & 1 & 0 & \(x\) & 1 & \text{Установка} \\
+    \hline
+    1 & 1 & 1 & 0 & 1 & \text{Инверсия} \\
+    1 & 1 & 1 & 1 & 0 & \text{Инверсия} \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|l|}
+    \hline
+    \(Q_n\) & \(Q_{n+1}\) & J & K & \text{Режим работы} \\
+    \hline
+    0 & 0 & 0 & \(x\) & Хранение 0 или Сброс \\
+    \hline
+    0 & 1 & 1 & \(x\) & Установка 1 или Инверсия \\
+    \hline
+    1 & 0 & \(x\) & 1 & Сброс 0 или Инверсия \\
+    \hline
+    1 & 1 & \(x\) & 0 & Хранение 1 или Установка \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{assets/bitmap2.png}
+  \caption{Схема работы D триггера}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{assets/D триггер.png}
+  \caption{D триггер}
+\end{figure}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    C & D & $Q_{n}$ & $Q_{n+1}$ & Режим \\
+    \hline
+    0 & $x$ & $Q_{n}$ & $Q_{n}$ & Хранение \\
+    \hline
+    1 & 1 & $x$ & 1 & Запись 1 \\
+    \hline
+    1 & 0 & $x$ & 0 & Запись 0 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    $Q_n$ & $Q_{n+1}$ & D & Режим \\
+    \hline
+    0 & 0 & 0 & Сохранение состояния 0 \\
+    \hline
+    0 & 1 & 1 & Переход в состояние 1 \\
+    \hline
+    1 & 0 & 0 & Переход в состояние 0 \\
+    \hline
+    1 & 1 & 1 & Сохранение состояния 1 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{assets/bitmap3.png}
+  \caption{Схема работы D триггера}
+\end{figure}
+
+\end{document}
