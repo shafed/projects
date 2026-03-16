@@ -1,16 +1,18 @@
 \begin{tikzpicture}
   \begin{axis}[
-      xlabel = {$k$},
-      ylabel = {Spearman $\rho$},
-      xtick = {50, 100, 200, 300, 500},
-      ymin=0, ymax=0.82,
-      legend pos = south east,
-      grid = both,
+      xlabel={$k$},
+      ylabel={Spearman $\rho$},
+      xtick={50,100,200,300,500},
+      ymin=0, ymax=0.85,
+      legend pos=south east,
+      grid=both,
     ]
-    \addplot table {figures/sensitivity.dat};
+
+    \addplot table[x=k, y=spearman] {results/sensitivity.dat};
     \addlegendentry{LSA}
 
-    \addplot[dashed, domain=50:500] {\BERTspearman};
+    \addplot[dashed] coordinates {(50,\BERTspearman) (500,\BERTspearman)};
     \addlegendentry{BERT}
+
   \end{axis}
 \end{tikzpicture}

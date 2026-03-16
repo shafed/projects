@@ -1,33 +1,39 @@
 import numpy as np
 from scipy.stats import skew
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.neighbors import NearestNeighbors
 
 
 def compute_participation_ratio(embeddings: np.ndarray) -> dict:
-    matrix = np.cov(embeddings.T)
-    lmbd = np.linalg.eigvalsh(matrix)
-    pr = sum(lmbd) ** 2 / sum(lmbd**2)
-    return {"pr": pr}
+    cov = np.cov(embeddings, rowvar=False)
+    lmbd = np.linalg.eigvalsh(cov)
+    lmbd = np.maximum(lmbd, 0.0)
+    s = lmbd.sum()
+    s2 = (lmbd**2).sum()
+    pr = (s**2) / s2 if s2 > 0 else 0.0
+    return {"pr": float(pr)}
 
 
 def compute_effective_rank(embeddings: np.ndarray) -> dict:
-    linalg = np.linalg.svd(embeddings, compute_uv=False)
-    p = linalg / sum(linalg)
-    H = -(p * np.log(p)).sum()
-    rank = np.exp(H)
-    return {"effective_rank": rank}
+    sv = np.linalg.svd(embeddings, compute_uv=False)
+    sv = sv[sv > 0]
+    p = sv / sv.sum()
+    H = -np.sum(p * np.log(p))
+    return {"effective_rank": float(np.exp(H))}
 
 
 def compute_isotropy(embeddings: np.ndarray) -> dict:
-    variances = np.var(embeddings, axis=0)
-    variances = variances[variances > 0]
-    isotropy = min(variances) / max(variances)
-    return {"isotropy": isotropy}
+    cov = np.cov(embeddings, rowvar=False)
+    lmbd = np.linalg.eigvalsh(cov)
+    lmbd = lmbd[lmbd > 1e-12]
+    if len(lmbd) == 0:
+        return {"isotropy": 0.0}
+    return {"isotropy": float(lmbd.min() / lmbd.max())}
 
 
-def compute_hubness(embeddings: np.ndarray, k: int = 10) -> dict:
-    sim = cosine_similarity(embeddings, embeddings)
-    neighbors = np.argsort(sim, axis=1)[:, -(k + 1) : -1]
-    N_k = np.bincount(neighbors.flatten())
-    hubness = skew(N_k)
-    return {"hubness": hubness}
+def compute_hubness(embeddings: np.ndarray, k: int = 5) -> dict:
+    nn = NearestNeighbors(n_neighbors=k + 1, metric="cosine", algorithm="brute")
+    nn.fit(embeddings)
+    _, indices = nn.kneighbors(embeddings)
+    indices = indices[:, 1:]
+    N_k = np.bincount(indices.ravel(), minlength=len(embeddings))
+    return {"hubness": float(skew(N_k))}

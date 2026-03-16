@@ -1,12 +1,13 @@
 \documentclass{article}
 \usepackage{fontspec}
-\usepackage[russian]{babel}
+\usepackage[russian,english]{babel}
 \usepackage[activate={true,nocompatibility},final]{microtype}
 \usepackage{booktabs}
 \usepackage{pgfplots}
+\usepackage[T2A]{fontenc}
 
 \pgfplotsset{compat=1.18}
-\newcommand{\BERTspearman}{0.810}
+\input{results/numbers.tex}
 
 \setmainfont{PT Serif}
 \setsansfont{PT Sans}

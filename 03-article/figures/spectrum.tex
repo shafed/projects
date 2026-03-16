@@ -1,15 +1,15 @@
 \begin{tikzpicture}
   \begin{axis}[
-      xlabel = {Компонента},
-      ylabel = {Нормализированное сингулярное число},
-      xtick = {1, 25, 50, 75, 100},
+      xlabel={Компонента},
+      ylabel={Нормализированное сингулярное число},
       ymin=0, ymax=0.82,
-      grid =both,
+      grid=both
     ]
-    \addplot table[x=i, y=lsa] {figures/spectrum.dat};
+
+    \addplot table[x=i, y=lsa] {results/spectrum.dat};
     \addlegendentry{LSA}
 
-    \addplot table[x=i, y=bert] {figures/spectrum.dat};
+    \addplot table[x=i, y=bert] {results/spectrum.dat};
     \addlegendentry{BERT}
 
   \end{axis}

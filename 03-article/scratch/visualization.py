@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 
-os.makedirs("results", exist_ok=True)
-
 
 def plot_isotropy_heatmap(
     lsa_embeddings: np.ndarray,
@@ -13,14 +11,25 @@ def plot_isotropy_heatmap(
     n_samples: int = 200,
     save_path: str = "results/isotropy_heatmap.pdf",
 ) -> None:
-    idx = np.random.choice(len(lsa_embeddings), n_samples, replace=False)
-    lsa = [lsa_embeddings[i] for i in idx]
-    bert = [bert_embeddings[i] for i in idx]
-    sim_lsa = cosine_similarity(lsa, lsa)
-    sim_bert = cosine_similarity(bert, bert)
-    fig, (ax1, ax2) = plt.subplots(1, 2)
-    ax1.imshow(sim_lsa, vmin=-1, vmax=1, cmap="coolwarm", interpolation="bilinear")
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
+
+    n = min(n_samples, len(lsa_embeddings), len(bert_embeddings))
+    idx = np.random.choice(len(lsa_embeddings), n, replace=False)
+
+    sim_lsa = cosine_similarity(lsa_embeddings[idx])
+    sim_bert = cosine_similarity(bert_embeddings[idx])
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+    im1 = ax1.imshow(sim_lsa, vmin=-1, vmax=1, cmap="coolwarm")
     ax1.set_title("LSA")
-    ax2.imshow(sim_bert, vmin=-1, vmax=1, cmap="coolwarm", interpolation="bilinear")
+    plt.colorbar(im1, ax=ax1)
+
+    im2 = ax2.imshow(sim_bert, vmin=-1, vmax=1, cmap="coolwarm")
     ax2.set_title("BERT")
-    plt.savefig(save_path, bbox_inches="tight")
+    plt.colorbar(im2, ax=ax2)
+
+    fig.suptitle("Cosine Similarity Heatmaps", fontsize=14)
+    fig.tight_layout()
+    plt.savefig(save_path, bbox_inches="tight", dpi=300)
+    plt.close()

@@ -1,180 +1,182 @@
+import os
+
 import numpy as np
+
 from data_loader import load_all
-from metrics_extrinsic import *
-from metrics_intrinsic import *
+from metrics_extrinsic import (
+    compute_classification,
+    compute_clustering,
+    compute_paraphrase,
+    compute_sts,
+)
+from metrics_intrinsic import (
+    compute_effective_rank,
+    compute_hubness,
+    compute_isotropy,
+    compute_participation_ratio,
+)
 from models import BERTEmbedder, LSAEmbedder
 from visualization import plot_isotropy_heatmap
+
+os.makedirs("../results", exist_ok=True)
 
 
 def generate_embeddings(data: dict) -> dict:
     bert = BERTEmbedder()
-    lsa = LSAEmbedder()
-    texts, labels = data["newsgroups"]
-    lsa_newsgroups = LSAEmbedder().fit_transform(texts)
-    bert_newsgroups = BERTEmbedder().fit_transform(texts)
+    ng = data["newsgroups"]
 
-    s1, s2, scores = data["stsb"]
-    lsa.fit_transform(s1 + s2)
-    lsa_stsb_1 = lsa.transform(s1)
-    lsa_stsb_2 = lsa.transform(s2)
-    bert_stsb_1 = bert.fit_transform(s1)
-    bert_stsb_2 = bert.fit_transform(s2)
+    # ── 20 Newsgroups: fit на train, transform train+test ──
+    lsa_ng = LSAEmbedder()
+    lsa_ng_train = lsa_ng.fit_transform(ng["train_texts"])
+    lsa_ng_test = lsa_ng.transform(ng["test_texts"])
+    bert_ng_train = bert.encode(ng["train_texts"])
+    bert_ng_test = bert.encode(ng["test_texts"])
 
-    s1, s2, scores = data["mrpc"]
-    lsa.fit_transform(s1 + s2)
-    lsa_mrpc_1 = lsa.transform(s1)
-    lsa_mrpc_2 = lsa.transform(s2)
-    bert_mrpc_1 = bert.fit_transform(s1)
-    bert_mrpc_2 = bert.fit_transform(s2)
+    # ── STS-B: fit на всех уникальных предложениях ──
+    s1, s2, _ = data["stsb"]
+    lsa_sts = LSAEmbedder()
+    lsa_sts.fit(list(set(s1 + s2)))
+    lsa_stsb_1 = lsa_sts.transform(s1)
+    lsa_stsb_2 = lsa_sts.transform(s2)
+    bert_stsb_1 = bert.encode(s1)
+    bert_stsb_2 = bert.encode(s2)
+
+    # ── MRPC: fit на всех уникальных предложениях ──
+    s1, s2, _ = data["mrpc"]
+    lsa_mr = LSAEmbedder()
+    lsa_mr.fit(list(set(s1 + s2)))
+    lsa_mrpc_1 = lsa_mr.transform(s1)
+    lsa_mrpc_2 = lsa_mr.transform(s2)
+    bert_mrpc_1 = bert.encode(s1)
+    bert_mrpc_2 = bert.encode(s2)
+
     return {
-        "lsa_newsgroups": lsa_newsgroups,
-        "bert_newsgroups": bert_newsgroups,
+        "lsa_ng_train": lsa_ng_train,
+        "lsa_ng_test": lsa_ng_test,
+        "bert_ng_train": bert_ng_train,
+        "bert_ng_test": bert_ng_test,
         "lsa_stsb_1": lsa_stsb_1,
-        "bert_stsb_1": bert_stsb_1,
         "lsa_stsb_2": lsa_stsb_2,
+        "bert_stsb_1": bert_stsb_1,
         "bert_stsb_2": bert_stsb_2,
         "lsa_mrpc_1": lsa_mrpc_1,
-        "bert_mrpc_1": bert_mrpc_1,
         "lsa_mrpc_2": lsa_mrpc_2,
+        "bert_mrpc_1": bert_mrpc_1,
         "bert_mrpc_2": bert_mrpc_2,
     }
 
 
-def run_intrinsic(embeddings: dict) -> dict:
-    lsa_newsgroups = embeddings["lsa_newsgroups"]
-    bert_newsgroups = embeddings["bert_newsgroups"]
-
-    pr_lsa = compute_participation_ratio(lsa_newsgroups)
-    pr_bert = compute_participation_ratio(bert_newsgroups)
-    effective_rank_lsa = compute_effective_rank(lsa_newsgroups)
-    effective_rank_bert = compute_effective_rank(bert_newsgroups)
-    isotropy_lsa = compute_isotropy(lsa_newsgroups)
-    isotropy_bert = compute_isotropy(bert_newsgroups)
-    hubness_lsa = compute_hubness(lsa_newsgroups)
-    hubness_bert = compute_hubness(bert_newsgroups)
-    return {
-        "lsa": {
-            **pr_lsa,
-            **effective_rank_lsa,
-            **isotropy_lsa,
-            **hubness_lsa,
-        },
-        "bert": {
-            **pr_bert,
-            **effective_rank_bert,
-            **isotropy_bert,
-            **hubness_bert,
-        },
-    }
+def run_intrinsic(emb: dict) -> dict:
+    results = {}
+    for name, key in [("lsa", "lsa_ng_test"), ("bert", "bert_ng_test")]:
+        E = emb[key]
+        results[name] = {
+            **compute_participation_ratio(E),
+            **compute_effective_rank(E),
+            **compute_isotropy(E),
+            **compute_hubness(E),
+        }
+        print(f"  [{name.upper()}] {results[name]}")
+    return results
 
 
-def run_extrinsic(embeddings: dict, data: dict) -> dict:
-    lsa_stsb_1 = embeddings["lsa_stsb_1"]
-    bert_stsb_1 = embeddings["bert_stsb_1"]
-    lsa_stsb_2 = embeddings["lsa_stsb_2"]
-    bert_stsb_2 = embeddings["bert_stsb_2"]
-    _, _, scores = data["stsb"]
+def run_extrinsic(emb: dict, data: dict) -> dict:
+    _, _, sts_scores = data["stsb"]
+    ng = data["newsgroups"]
+    _, _, mrpc_labels = data["mrpc"]
 
-    spearman_lsa = compute_sts(lsa_stsb_1, lsa_stsb_2, scores)
-    spearman_bert = compute_sts(bert_stsb_1, bert_stsb_2, scores)
-
-    lsa_newsgroups = embeddings["lsa_newsgroups"]
-    bert_newsgroups = embeddings["bert_newsgroups"]
-    _, labels = data["newsgroups"]
-
-    accuracy_f1_macro_lsa = compute_classification(lsa_newsgroups, labels)
-    accuracy_f1_macro_bert = compute_classification(bert_newsgroups, labels)
-    ari_silhouette_lsa = compute_clustering(lsa_newsgroups, labels)
-    ari_silhouette_bert = compute_clustering(bert_newsgroups, labels)
-
-    lsa_mrpc_1 = embeddings["lsa_mrpc_1"]
-    bert_mrpc_1 = embeddings["bert_mrpc_1"]
-    lsa_mrpc_2 = embeddings["lsa_mrpc_2"]
-    bert_mrpc_2 = embeddings["bert_mrpc_2"]
-    _, _, labels = data["mrpc"]
-
-    f1_lsa = compute_paraphrase(lsa_mrpc_1, lsa_mrpc_2, labels)
-    f1_bert = compute_paraphrase(bert_mrpc_1, bert_mrpc_2, labels)
-    return {
-        "lsa": {
-            **spearman_lsa,
-            **accuracy_f1_macro_lsa,
-            **ari_silhouette_lsa,
-            **f1_lsa,
-        },
-        "bert": {
-            **spearman_bert,
-            **accuracy_f1_macro_bert,
-            **ari_silhouette_bert,
-            **f1_bert,
-        },
-    }
+    results = {}
+    for name in ["lsa", "bert"]:
+        sts = compute_sts(emb[f"{name}_stsb_1"], emb[f"{name}_stsb_2"], sts_scores)
+        cls = compute_classification(
+            emb[f"{name}_ng_train"],
+            emb[f"{name}_ng_test"],
+            ng["train_labels"],
+            ng["test_labels"],
+        )
+        clu = compute_clustering(emb[f"{name}_ng_test"], ng["test_labels"])
+        par = compute_paraphrase(
+            emb[f"{name}_mrpc_1"], emb[f"{name}_mrpc_2"], mrpc_labels
+        )
+        results[name] = {**sts, **cls, **clu, **par}
+        print(f"  [{name.upper()}] {results[name]}")
+    return results
 
 
-def lsa_sensitivity(data: dict) -> None:
-    for k in [50, 100, 200, 300, 500]:
-        lsa = LSAEmbedder(k)
-        s1, s2, scores = data["stsb"]
-        lsa.fit_transform(s1 + s2)
-        e1 = lsa.transform(s1)
-        e2 = lsa.transform(s2)
-        res = compute_sts(e1, e2, scores)
-        with open("results/sensitivity.dat", "a") as f:
-            f.write(f"{k} {res['spearman']:.3f}\n")
+def lsa_sensitivity(data: dict, bert_rho: float) -> None:
+    s1, s2, scores = data["stsb"]
+    all_texts = list(set(s1 + s2))
+
+    with open("../results/sensitivity.dat", "w") as f:
+        f.write("k spearman\n")
+        for k in [50, 100, 200, 300, 500]:
+            lsa = LSAEmbedder(n_components=k)
+            lsa.fit(all_texts)
+            e1 = lsa.transform(s1)
+            e2 = lsa.transform(s2)
+            rho = compute_sts(e1, e2, scores)["spearman"]
+            f.write(f"{k} {rho:.4f}\n")
+            print(f"    k={k:>3d}  ρ={rho:.4f}")
+        f.write(f"# BERT baseline: {bert_rho:.4f}\n")
 
 
-def write_value_to_tex(data: dict) -> None:
+def save_spectrum_data(emb: dict) -> None:
+    lsa_sv = np.linalg.svd(emb["lsa_ng_test"], compute_uv=False)
+    bert_sv = np.linalg.svd(emb["bert_ng_test"], compute_uv=False)
+    lsa_sv = lsa_sv / lsa_sv[0]
+    bert_sv = bert_sv / bert_sv[0]
+
+    max_len = max(len(lsa_sv), len(bert_sv))
+    with open("../results/spectrum.dat", "w") as f:
+        f.write("i lsa bert\n")
+        for i in range(max_len):
+            l = f"{lsa_sv[i]:.6f}" if i < len(lsa_sv) else "NaN"
+            b = f"{bert_sv[i]:.6f}" if i < len(bert_sv) else "NaN"
+            f.write(f"{i + 1} {l} {b}\n")
+
+
+def write_results_to_tex(intrinsic: dict, extrinsic: dict) -> None:
+    skip = {"p_value", "optimal_threshold"}
+    with open("../results/numbers.tex", "w") as f:
+        for model in ["lsa", "bert"]:
+            prefix = model.upper()
+            for src in [intrinsic[model], extrinsic[model]]:
+                for key, value in src.items():
+                    if key in skip:
+                        continue
+                    tex_key = key.replace("_", "")
+                    cmd = f"\\newcommand{{\\{prefix}{tex_key}}}{{{value:.3f}}}"
+                    f.write(cmd + "\n")
+
+
+def main():
+    print("Loading data...")
+    data = load_all()
+
+    print("Generating embeddings...")
     emb = generate_embeddings(data)
 
+    print("Intrinsic metrics...")
     intrinsic = run_intrinsic(emb)
-    lsa = intrinsic["lsa"]
-    bert = intrinsic["bert"]
-    with open("results/numbers.tex", "a") as f:
-        f.write(f"\\newcommand{{\\LSApr}}{{{lsa['pr']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTpr}}{{{bert['pr']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAeffectiverank}}{{{lsa['effective_rank']:.3f}}}\n")
-        f.write(
-            f"\\newcommand{{\\BERTeffectiverank}}{{{bert['effective_rank']:.3f}}}\n"
-        )
-        f.write(f"\\newcommand{{\\LSAisotropy}}{{{lsa['isotropy']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTisotropy}}{{{bert['isotropy']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAhubness}}{{{lsa['hubness']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERThubness}}{{{bert['hubness']:.3f}}}\n")
 
+    print("Extrinsic metrics...")
     extrinsic = run_extrinsic(emb, data)
-    lsa = extrinsic["lsa"]
-    bert = extrinsic["bert"]
-    with open("results/numbers.tex", "a") as f:
-        f.write(f"\\newcommand{{\\LSAspearman}}{{{lsa['spearman']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTspearman}}{{{bert['spearman']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAaccuracy}}{{{lsa['accuracy']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTaccuracy}}{{{bert['accuracy']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAf1_macro}}{{{lsa['f1_macro']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTf1_macro}}{{{bert['f1_macro']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAari}}{{{lsa['ari']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTari}}{{{bert['ari']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAsilhouette}}{{{lsa['silhouette']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTsilhouette}}{{{bert['silhouette']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\LSAf1}}{{{lsa['f1']:.3f}}}\n")
-        f.write(f"\\newcommand{{\\BERTf1}}{{{bert['f1']:.3f}}}\n")
+
+    print("Spectrum...")
+    save_spectrum_data(emb)
+
+    print("LSA sensitivity...")
+    bert_rho = extrinsic["bert"]["spearman"]
+    lsa_sensitivity(data, bert_rho)
+
+    print("LaTeX output...")
+    write_results_to_tex(intrinsic, extrinsic)
+
+    print("Heatmap...")
+    plot_isotropy_heatmap(emb["lsa_ng_test"], emb["bert_ng_test"])
+
+    print("Done!")
 
 
-def save_spectrum_data(embeddings: dict) -> None:
-    lsa_newsgroups = embeddings["lsa_newsgroups"]
-    bert_newsgroups = embeddings["bert_newsgroups"]
-    lsa = np.linalg.svd(lsa_newsgroups, compute_uv=False)
-    lsa = lsa / lsa[0]
-    bert = np.linalg.svd(bert_newsgroups, compute_uv=False)
-    bert = bert / bert[0]
-    with open("results/spectrum.dat", "w") as f:
-        f.write("i lsa bert\n")
-        for i, (l, b) in enumerate(zip(lsa, bert), start=1):
-            f.write(f"{i} {l} {b}\n")
-
-
-data = load_all()
-emb = generate_embeddings(data)
-# write_value_to_tex(data)
-# lsa_sensitivity(data)
-save_spectrum_data(emb)
-# plot_isotropy_heatmap(emb["lsa_newsgroups"], emb["bert_newsgroups"])
+if __name__ == "__main__":
+    main()
