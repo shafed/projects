@@ -174,7 +174,15 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{assets/bitmap3.png}
+  \begin{tikzpicture}[> = stealth, auto]
+    \node[state] (0) {0};
+    \node[state] (1) [right=4cm of 0] {1};
+
+    \path[->] (0) edge [loop left] node[below=0.1cm] {\(D = 0\)} ()
+    (1) edge [loop right] node [below=0.1cm] {\(D=0\)} ()
+    (0) edge [bend right] node [below] {\(D=1\)} (1)
+    (1) edge [bend right] node [above] {\(D=0\)} (0);
+  \end{tikzpicture}
   \caption{Схема работы D триггера}
 \end{figure}
 
