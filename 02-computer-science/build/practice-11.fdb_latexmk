@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1773679568.6148 "practice-11.tex" "build/practice-11.pdf" "practice-11" 1773679569.64703 0
+["lualatex"] 1773855602.52386 "practice-11.tex" "build/practice-11.pdf" "practice-11" 1773855603.59448 0
   "/etc/texmf/tex/generic/config/language.dat" 1772883756.50196 3114 a006ba735899d39700b07ae8d0a7aaa7 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc" 1772883665.10443 128286 b0e9c2dbbe3c1858732b85ff33cf8283 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc" 1772883665.04443 127657 3b1fb37a4ea28f274f9d72c03fc0bda7 ""
@@ -7,8 +7,8 @@
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/timesbd.luc" 1772884153.9972 142034 0c0a0e3f40fce9823915d6f4889d2a40 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/timesbi.luc" 1772884153.9642 100718 f9da5468891d1fffe6709085f1656e68 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/timesi.luc" 1772884154.0222 100232 281ab9d2fd6ede74a6c04c6f5e072b99 ""
-  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1773337550.36194 8087 2149722bece438739d4c5ffeaf50535b ""
-  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1772970969.74766 71773 e556fac51f166b455489a099ed598f89 ""
+  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-lookup-cache.luc" 1773855148.22559 1941 5fff08db6bcc9caed00d0160086738f0 ""
+  "/home/shafed/.texlive/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz" 1773855146.66936 76091 217324d3840888c4dbd227781bd809f6 ""
   "/usr/share/fonts/TTF/times.ttf" 1771072599 330412 4f97f4d6ba74767259ccfb242ce0e3f7 ""
   "/usr/share/fonts/TTF/timesbd.ttf" 1771072599 333900 ed6e29caf3843142d739232aa8642158 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1772820570 1004 54797486969f23fa377b128694d548df ""
@@ -30,6 +30,7 @@
   "/usr/share/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1772820570 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb" 1772820570 36741 fa121aac0049305630cf160b86157ee4 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1772820570 35469 70d41d2b9ea31d5d813066df7c99281c ""
+  "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1772820570 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1772820570 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1772820570 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texmf-dist/tex/generic/babel-russian/russianb.ldf" 1772820570 27193 cd3440b122aaa8e30416378ef38b3173 ""
@@ -199,11 +200,10 @@
   "assets/JK.png" 1773674794.41428 3909 64fabbde7c14d8064bb323437d4bee7b ""
   "assets/bitmap.png" 1773674658.54538 9856 67928dd2dbb1add611016d773687964b ""
   "assets/bitmap2.png" 1773676480.69903 7408 03c6cc631640da333082490c217f6db9 ""
-  "assets/bitmap3.png" 1773677390.00965 7766 33ae1ea915232beaa5757b54dcdffdda ""
   "assets/gerb.png" 1773059512.68227 115858 892dc2b44711f6df5e3d2bcf04352feb ""
   "assets/scheme.png" 1773668905.24143 7647 166738e4499f760888ce2b7bceba9817 ""
-  "build/practice-11.aux" 1773679569.53208 844 16d28f03adee31e00c9a9d0f7ee72156 "lualatex"
-  "practice-11.tex" 1773679566.14555 5543 6547c420b3dc9322e083c2a269720115 ""
+  "build/practice-11.aux" 1773855603.47373 844 16d28f03adee31e00c9a9d0f7ee72156 "lualatex"
+  "practice-11.tex" 1773855601.19247 5847 a7234892627a42d97bbc0905c7b3d622 ""
   (generated)
   "build/practice-11.aux"
   "build/practice-11.log"

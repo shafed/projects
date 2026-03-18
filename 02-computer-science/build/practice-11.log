@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.3.7)  16 MAR 2026 19:46
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2026/dev/Arch Linux)  (format=lualatex 2026.3.7)  18 MAR 2026 20:40
  restricted system commands enabled.
  file:line:error style messages enabled.
 **practice-11.tex
@@ -647,12 +647,7 @@ File: assets/D триггер.png Graphic file (type png)
 <use assets/D триггер.png>
 Package luatex.def Info: assets/D триггер.png  used on input line 141.
 (luatex.def)             Requested size: 375.57782pt x 163.7241pt.
-<assets/bitmap3.png, id=34, 150.5625pt x 150.5625pt>
-File: assets/bitmap3.png Graphic file (type png)
-<use assets/bitmap3.png>
-Package luatex.def Info: assets/bitmap3.png  used on input line 177.
-(luatex.def)             Requested size: 187.78532pt x 187.80289pt.
- [3<./assets/bitmap2.png><./assets/D триггер.png>] [4<./assets/bitmap3.png>] (./build/practice-11.aux)
+ [3<./assets/bitmap2.png><./assets/D триггер.png>] [4] (./build/practice-11.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -660,19 +655,19 @@ L3 programming layer <2026-01-19>
 )
 
 Here is how much of LuaTeX's memory you used:
- 18023 strings out of 476076
+ 18136 strings out of 476076
  100000,953878 words of node,token memory allocated
  532 words of node memory still in use:
    7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 14 attribute, 51 glue_spec, 8 attribute_list, 2 write nodes
-   avail lists: 1:1,2:841,3:57,4:36,5:40,6:26,7:2252,8:4,9:557,10:7,11:200
- 39986 multiletter control sequences out of 65536+600000
+   avail lists: 1:1,2:1168,3:233,4:36,5:40,6:26,7:2252,8:4,9:557,10:7,11:200
+ 40102 multiletter control sequences out of 65536+600000
  61 fonts using 6713831 bytes
- 102i,12n,101p,442b,286s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/fonts/TTF/timesbd.ttf></usr/share/fonts/TTF/times.ttf></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on practice-11.pdf (7 pages, 230673 bytes).
+ 102i,12n,101p,442b,1027s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/fonts/TTF/timesbd.ttf></usr/share/fonts/TTF/times.ttf></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+Output written on practice-11.pdf (7 pages, 233619 bytes).
 
-PDF statistics: 66 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+PDF statistics: 68 PDF objects out of 1000 (max. 8388607)
+ 39 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 131072)
  16 words of extra memory for PDF output out of 10000 (max. 100000000)
 

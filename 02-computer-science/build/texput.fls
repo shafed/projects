@@ -1,0 +1,3 @@
+PWD /home/shafed/projects/02-computer-science
+INPUT /var/lib/texmf/web2c/luahbtex/lualatex.fmt
+OUTPUT build/texput.log
