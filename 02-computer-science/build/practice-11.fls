@@ -223,12 +223,8 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
-INPUT ./assets/bitmap.png
-INPUT ./assets/bitmap.png
 INPUT ./assets/JK.png
 INPUT ./assets/JK.png
-INPUT ./assets/bitmap2.png
-INPUT ./assets/bitmap2.png
 INPUT ./assets/D триггер.png
 INPUT ./assets/D триггер.png
 INPUT ./build/practice-11.aux

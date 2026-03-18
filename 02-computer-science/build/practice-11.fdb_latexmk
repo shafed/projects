@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1773855602.52386 "practice-11.tex" "build/practice-11.pdf" "practice-11" 1773855603.59448 0
+["lualatex"] 1773857039.80419 "practice-11.tex" "build/practice-11.pdf" "practice-11" 1773857040.84837 0
   "/etc/texmf/tex/generic/config/language.dat" 1772883756.50196 3114 a006ba735899d39700b07ae8d0a7aaa7 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-bold.luc" 1772883665.10443 128286 b0e9c2dbbe3c1858732b85ff33cf8283 ""
   "/home/shafed/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman12-regular.luc" 1772883665.04443 127657 3b1fb37a4ea28f274f9d72c03fc0bda7 ""
@@ -198,12 +198,10 @@
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1772883783 5658772 4776fc1cc3f7d68f3cd54211d27ac5d8 ""
   "assets/D триггер.png" 1773676605.0303 3931 ebc0001ab7866b943a49dbccc6b02bb9 ""
   "assets/JK.png" 1773674794.41428 3909 64fabbde7c14d8064bb323437d4bee7b ""
-  "assets/bitmap.png" 1773674658.54538 9856 67928dd2dbb1add611016d773687964b ""
-  "assets/bitmap2.png" 1773676480.69903 7408 03c6cc631640da333082490c217f6db9 ""
   "assets/gerb.png" 1773059512.68227 115858 892dc2b44711f6df5e3d2bcf04352feb ""
   "assets/scheme.png" 1773668905.24143 7647 166738e4499f760888ce2b7bceba9817 ""
-  "build/practice-11.aux" 1773855603.47373 844 16d28f03adee31e00c9a9d0f7ee72156 "lualatex"
-  "practice-11.tex" 1773855601.19247 5847 a7234892627a42d97bbc0905c7b3d622 ""
+  "build/practice-11.aux" 1773857040.73769 990 3ec79c3461d01a714637f9ea5bfb366b "lualatex"
+  "practice-11.tex" 1773857038.43791 6537 b8f12f53ab8be4b1e293468547f4a942 ""
   (generated)
   "build/practice-11.aux"
   "build/practice-11.log"

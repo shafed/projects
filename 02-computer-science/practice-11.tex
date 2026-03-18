@@ -84,7 +84,16 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.3\textwidth]{assets/bitmap.png}
+  \begin{tikzpicture}[> = stealth, auto, thick]
+    \node[state] (0) {0};
+    \node[state] (1) [right=4cm of 0] {1};
+
+    \path[->] (0) edge [loop left] node[below=0.1cm] {\(S = 0\)} ()
+    (1) edge [loop right] node [above=0.1cm] {\(R=0\)} ()
+    (0) edge [bend right] node [below] {\(SR=10\)} (1)
+    (1) edge [bend right] node [above] {\(SR=01\)} (0);
+  \end{tikzpicture}
+  \caption{Схема работы SR триггера}
 \end{figure}
 
 \begin{figure}[h]
@@ -132,7 +141,15 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.4\textwidth]{assets/bitmap2.png}
+  \begin{tikzpicture}[> = stealth, auto, thick]
+    \node[state] (0) {0};
+    \node[state] (1) [right=4cm of 0] {1};
+
+    \path[->] (0) edge [loop left] node[below=0.1cm] {\(J = 0\)} ()
+    (1) edge [loop right] node [above=0.1cm] {\(K=0\)} ()
+    (0) edge [bend right] node [below] {\(J=1\)} (1)
+    (1) edge [bend right] node [above] {\(K=1\)} (0);
+  \end{tikzpicture}
   \caption{Схема работы JK триггера}
 \end{figure}
 
@@ -174,12 +191,12 @@
 
 \begin{figure}[H]
   \centering
-  \begin{tikzpicture}[> = stealth, auto]
+  \begin{tikzpicture}[> = stealth, auto, thick]
     \node[state] (0) {0};
     \node[state] (1) [right=4cm of 0] {1};
 
     \path[->] (0) edge [loop left] node[below=0.1cm] {\(D = 0\)} ()
-    (1) edge [loop right] node [below=0.1cm] {\(D=0\)} ()
+    (1) edge [loop right] node [above=0.1cm] {\(D=0\)} ()
     (0) edge [bend right] node [below] {\(D=1\)} (1)
     (1) edge [bend right] node [above] {\(D=0\)} (0);
   \end{tikzpicture}
