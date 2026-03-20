@@ -1,5 +1,5 @@
 class Family:
-    def __init__(self, name, money, house) -> None:
+    def __init__(self, name, money, house=False) -> None:
         self.name = name
         self.money = money
         self.house = house
@@ -32,7 +32,7 @@ class Family:
             print("Try to buy a house again")
 
 
-family = Family("Common", 100_000, False)
+family = Family("Common", 100_000)
 family.info()
 print()
 family.buy_house(900_000)
