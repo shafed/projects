@@ -1,7 +1,7 @@
 import os
+from pathlib import Path
 
 import numpy as np
-
 from data_loader import load_all
 from metrics_extrinsic import (
     compute_classification,
@@ -18,7 +18,27 @@ from metrics_intrinsic import (
 from models import BERTEmbedder, LSAEmbedder
 from visualization import plot_isotropy_heatmap
 
-os.makedirs("../results", exist_ok=True)
+BASE_DIR = Path(__file__).resolve().parent
+RESULTS_DIR = BASE_DIR.parent / "results"
+
+os.makedirs(RESULTS_DIR, exist_ok=True)
+
+
+def unique_preserve_order(items: list[str]) -> list[str]:
+    """Удаляет дубликаты, сохраняя исходный порядок."""
+    return list(dict.fromkeys(items))
+
+
+def metric_key_to_tex(key: str) -> str:
+    """Безопасное имя макроса для LaTeX (без цифр в control sequence)."""
+    mapping = {
+        "f1_macro": "fonemacro",
+        "f1": "fone",
+        "p_value": "pvalue",
+    }
+    if key in mapping:
+        return mapping[key]
+    return key.replace("_", "")
 
 
 def generate_embeddings(data: dict) -> dict:
@@ -35,7 +55,7 @@ def generate_embeddings(data: dict) -> dict:
     # ── STS-B: fit на всех уникальных предложениях ──
     s1, s2, _ = data["stsb"]
     lsa_sts = LSAEmbedder()
-    lsa_sts.fit(list(set(s1 + s2)))
+    lsa_sts.fit(unique_preserve_order(s1 + s2))
     lsa_stsb_1 = lsa_sts.transform(s1)
     lsa_stsb_2 = lsa_sts.transform(s2)
     bert_stsb_1 = bert.encode(s1)
@@ -44,7 +64,7 @@ def generate_embeddings(data: dict) -> dict:
     # ── MRPC: fit на всех уникальных предложениях ──
     s1, s2, _ = data["mrpc"]
     lsa_mr = LSAEmbedder()
-    lsa_mr.fit(list(set(s1 + s2)))
+    lsa_mr.fit(unique_preserve_order(s1 + s2))
     lsa_mrpc_1 = lsa_mr.transform(s1)
     lsa_mrpc_2 = lsa_mr.transform(s2)
     bert_mrpc_1 = bert.encode(s1)
@@ -105,9 +125,10 @@ def run_extrinsic(emb: dict, data: dict) -> dict:
 
 def lsa_sensitivity(data: dict, bert_rho: float) -> None:
     s1, s2, scores = data["stsb"]
-    all_texts = list(set(s1 + s2))
+    all_texts = unique_preserve_order(s1 + s2)
 
-    with open("../results/sensitivity.dat", "w") as f:
+    sensitivity_path = RESULTS_DIR / "sensitivity.dat"
+    with open(sensitivity_path, "w") as f:
         f.write("k spearman\n")
         for k in [50, 100, 200, 300, 500]:
             lsa = LSAEmbedder(n_components=k)
@@ -127,7 +148,8 @@ def save_spectrum_data(emb: dict) -> None:
     bert_sv = bert_sv / bert_sv[0]
 
     max_len = max(len(lsa_sv), len(bert_sv))
-    with open("../results/spectrum.dat", "w") as f:
+    spectrum_path = RESULTS_DIR / "spectrum.dat"
+    with open(spectrum_path, "w") as f:
         f.write("i lsa bert\n")
         for i in range(max_len):
             l = f"{lsa_sv[i]:.6f}" if i < len(lsa_sv) else "NaN"
@@ -137,14 +159,15 @@ def save_spectrum_data(emb: dict) -> None:
 
 def write_results_to_tex(intrinsic: dict, extrinsic: dict) -> None:
     skip = {"p_value", "optimal_threshold"}
-    with open("../results/numbers.tex", "w") as f:
+    numbers_path = RESULTS_DIR / "numbers.tex"
+    with open(numbers_path, "w") as f:
         for model in ["lsa", "bert"]:
             prefix = model.upper()
             for src in [intrinsic[model], extrinsic[model]]:
                 for key, value in src.items():
                     if key in skip:
                         continue
-                    tex_key = key.replace("_", "")
+                    tex_key = metric_key_to_tex(key)
                     cmd = f"\\newcommand{{\\{prefix}{tex_key}}}{{{value:.3f}}}"
                     f.write(cmd + "\n")
 
