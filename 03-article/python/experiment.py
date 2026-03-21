@@ -65,6 +65,9 @@ warnings.filterwarnings("ignore")
 RANDOM_STATE = 42
 np.random.seed(RANDOM_STATE)
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, ".."))
+
 LSA_DIMS = [50, 100, 200, 300, 500]
 LSA_DEFAULT_K = 300  # для основного попарного сравнения
 BERT_MODEL = "all-MiniLM-L6-v2"
@@ -84,8 +87,13 @@ N_HEATMAP_SAMPLES = 200  # для тепловой карты
 N_COS_PAIRS = 10_000  # для гистограммы cos-sim
 BERT_BATCH = 128
 
-OUT_DIR = "results"
-FIG_DIR = "figures"
+OUT_DIR = os.path.join(PROJECT_ROOT, "results")
+FIG_DIR = os.path.join(SCRIPT_DIR, "figures")
+
+
+def unique_preserve_order(items: List[str]) -> List[str]:
+    """Удаляет дубликаты, сохраняя стабильный порядок."""
+    return list(dict.fromkeys(items))
 
 
 # ╔════════════════════════════════════════════════════════════╗
@@ -564,8 +572,8 @@ def main():
     b_mr2 = bert.encode(mrpc_s2, BERT_BATCH)
 
     # ── LSA: чувствительность к k ────────────────────────────
-    sts_all = list(set(sts_s1 + sts_s2))
-    mrpc_all = list(set(mrpc_s1 + mrpc_s2))
+    sts_all = unique_preserve_order(sts_s1 + sts_s2)
+    mrpc_all = unique_preserve_order(mrpc_s1 + mrpc_s2)
 
     lsa_sts_by_k: Dict[int, float] = {}
     print("\n[LSA] Анализ чувствительности к k …")

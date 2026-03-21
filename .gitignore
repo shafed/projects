@@ -1,1 +1,3 @@
-02-computer-science/build/
+build/
+*/build/
+**/build/
