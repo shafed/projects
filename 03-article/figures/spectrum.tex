@@ -1,16 +1,23 @@
-\begin{tikzpicture}
-  \begin{axis}[
-      xlabel={Компонента},
-      ylabel={Нормализированное сингулярное число},
-      ymin=0, ymax=0.82,
-      grid=both
-    ]
+\begin{figure}[H]
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=\textwidth,
+        height=8cm,
+        grid=both,
+        xlabel={$i$},
+        ylabel={Сингулярные значения $\sigma$},
+        legend pos=north east,
+        mark size=0.8pt,
+        line width=1pt,
+      ]
 
-    \addplot table[x=i, y=lsa] {results/spectrum.dat};
-    \addlegendentry{LSA}
+      \addplot table[x=i, y=lsa] {results/spectrum.dat};
+      \addlegendentry{LSA}
 
-    \addplot table[x=i, y=bert] {results/spectrum.dat};
-    \addlegendentry{BERT}
+      \addplot table[x=i, y=bert] {results/spectrum.dat};
+      \addlegendentry{MiniLM}
 
-  \end{axis}
-\end{tikzpicture}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Спектр сингулярных чисел}
+\end{figure}

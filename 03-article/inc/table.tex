@@ -1,0 +1,22 @@
+\begin{table}[H]
+  \centering
+  \label{tab:combined_results}
+  \begin{tabularx}{\textwidth}{@{} X ccccc c @{}}
+    \toprule
+    \textbf{Модель} & \textbf{STS ($\rho$)} & \textbf{20NG (F1)} &
+    \textbf{ARI} & \textbf{PR} & \textbf{ER} & \textbf{IS} \\
+    \midrule
+    LSA $k=50$  & 0.44 & 0.612 & 0.14 & 39.04  & 45.17  & 0.1057 \\
+    LSA $k=100$ & 0.52 & 0.685 & \textbf{0.17} & 75.07  & 93.02  & 0.0787 \\
+    LSA $k=200$ & 0.58 & 0.741 & 0.11 & 143.35 & 189.42 & 0.0619 \\
+    LSA $k=300$ & 0.61 & 0.752 & 0.06 & 209.14 & 286.03 & 0.0529 \\
+    LSA $k=500$ & 0.64 & 0.757 & 0.02 & \textbf{334.75} &
+    \textbf{479.05} & 0.0457 \\
+    \midrule
+    \textbf{MiniLM-L6-v2} & \textbf{0.82} & \textbf{0.796} &
+    \textbf{0.52} & 100.96 & 309.54 & 0.0011 \\
+    \bottomrule
+  \end{tabularx}
+  \vspace{1mm}
+  \caption{Метрики}
+\end{table}
