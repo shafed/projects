@@ -1,15 +1,21 @@
 \begin{table}[H]
   \centering
+  \small                          % shrinks content ~10%, kills the
+  % 16pt overflow
+  \setlength{\tabcolsep}{4pt}     % tighter column gaps (default is 6pt)
   \begin{tabularx}{\textwidth}{@{} X ccccccc @{}}
     \toprule
-    \textbf{Модель} & \textbf{STS ($\rho$)} & \textbf{20NG (F1)} &
-    \textbf{ARI} & \textbf{Silhouette} & \textbf{PR} & \textbf{ER} &
+    \textbf{Модель} &
+    \textbf{STS ($\rho$)} & \textbf{20NG (F1)} &
+    \textbf{ARI} & \textbf{Sil.} & \textbf{PR} & \textbf{ER} &
     \textbf{IS} \\
     \midrule
-    LSA $k=300$ & 0.56 & 0.658 & 0.17 & 0.047 & 198.60 & 284.93 & 0.0120 \\
+    LSA $k{=}300$
+    & 0.56 & 0.658 & 0.17 & 0.047 & 198.60 & 284.93 & 0.0120 \\
     \midrule
-    \textbf{MiniLM-L6-v2} & \textbf{0.82} & \textbf{0.688} &
-    \textbf{0.37} & \textbf{0.066} & 117.85 & 312.97 & 0.0011 \\
+    \textbf{MiniLM-L6-v2}
+    & \textbf{0.82} & \textbf{0.688} & \textbf{0.37}
+    & \textbf{0.066} & 117.85 & 312.97 & 0.0011 \\
     \bottomrule
   \end{tabularx}
   \vspace{1mm}
