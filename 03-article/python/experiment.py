@@ -72,15 +72,8 @@ LSA_DIMS = [50, 100, 200, 300, 500]
 LSA_DEFAULT_K = 300  # для основного попарного сравнения
 BERT_MODEL = "all-MiniLM-L6-v2"
 
-# 6 разнородных категорий для 20 Newsgroups
-NG_CATEGORIES = [
-    "alt.atheism",
-    "comp.graphics",
-    "rec.sport.baseball",
-    "sci.med",
-    "soc.religion.christian",
-    "talk.politics.guns",
-]
+# Все 20 категорий
+NG_CATEGORIES = None  # None = все категории
 
 K_NEIGHBORS = 5  # для hubness
 N_HEATMAP_SAMPLES = 200  # для тепловой карты
