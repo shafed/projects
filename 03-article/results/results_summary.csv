@@ -2,8 +2,8 @@
 STS Spearman ρ,0.5635,0.8203
 Classification Accuracy,0.6729,0.7029
 Classification F1-macro,0.6584,0.6880
-Clustering ARI,0.1703,0.3740
-Clustering Silhouette,0.0466,0.0663
+Clustering ARI,0.1703,0.3748
+Clustering Silhouette,0.0466,0.0664
 MRPC F1,0.8170,0.8354
 Participation Ratio,198.5975,117.8525
 Effective Rank,284.9294,312.9672
