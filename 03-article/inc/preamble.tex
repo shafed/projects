@@ -23,3 +23,11 @@
 \setmainfont{PT Serif}
 \setsansfont{PT Sans}
 \setmonofont{PT Mono}
+% --- библиография (ГОСТ через biblatex+biber) ---
+\usepackage[
+  backend=biber,
+  style=gost-numeric,
+  language=auto,
+  sorting=none,
+]{biblatex}
+\addbibresource{inc/bibliography.bib}
